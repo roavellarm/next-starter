@@ -1,16 +1,20 @@
-<h1>
-  <strong>Next Starter +</strong>&nbsp;
-  <img src="assets/ts.png" height="30px" />&nbsp;&nbsp;
-  <img src="assets/styled-components.png" height="30px" />&nbsp;&nbsp;
-  <img src="assets/eslint.png" height="30px" />&nbsp;&nbsp;
-  <img src="assets/prettier.png" height="30px" />
+<h1 align="center">
+  <strong>Next Starter</strong>
 </h1>
 
-## ⚡️ Quick Start
+<p align="center">
+  <img src="assets/next.png" height="50px" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/ts.png" height="50px" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/styled-components.png" height="50px" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/eslint.png" height="50px" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/prettier.png" height="50px" />
+</p>
+
+### ⚡️ Quick Start
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/project?template=https://github.com/roavellarm/next-starter)
 
-## 🚀 Getting Started
+### 🚀 Getting Started
 
 Run the following command to create a new project with this Starter:
 
@@ -27,7 +31,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see your new project!
 
-## 🧐 What's inside?
+### 🧐 What's inside?
 
 This Starter includes:
 
@@ -36,7 +40,7 @@ This Starter includes:
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 
-## 📚 Learn More About Next.js
+### 📚 Learn More About Next.js
 
 To learn more about Next.js, take a look at the following resources:
 
