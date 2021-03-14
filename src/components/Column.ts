@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 interface ColumnProps {
-  center: boolean
-  right: boolean
+  center?: boolean
+  right?: boolean
 }
 
 const Column = styled.div<ColumnProps>`
@@ -13,6 +13,8 @@ const Column = styled.div<ColumnProps>`
     if (right) return 'flex-end'
     return 'flex-start'
   }};
+
+  padding: 2rem;
 `
 
 export default Column
