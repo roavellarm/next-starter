@@ -14,12 +14,10 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Navbar toggleTheme={toggleTheme} />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </>
+      <Navbar toggleTheme={toggleTheme} />
+      <Component {...pageProps} />
+    </ThemeProvider>
   )
 }
