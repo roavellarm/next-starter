@@ -5,6 +5,7 @@ declare module 'styled-components' {
     title: string
 
     palette: {
+      text: string
       lightText: string
       darkText: string
 

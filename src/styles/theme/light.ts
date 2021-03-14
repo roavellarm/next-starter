@@ -2,7 +2,8 @@ const lightTheme = {
   title: 'light',
 
   palette: {
-    lightText: '#ffffff',
+    text: '#000000',
+    lightText: '#fefefe',
     darkText: '#000000',
 
     primary: '#6200ee',
@@ -12,10 +13,10 @@ const lightTheme = {
     secondaryVariant: '#018786',
 
     // Appears behind scrollable content.
-    background: '#ffffff',
+    background: '#fefefe',
 
     // Surfaces of components, such as cards, sheets, and menus.
-    surface: '#ffffff',
+    surface: '#fefefe',
 
     // Messages types colors
     error: '#f44336',

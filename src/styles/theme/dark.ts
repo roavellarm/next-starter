@@ -2,7 +2,8 @@ const darkTheme = {
   title: 'dark',
 
   palette: {
-    lightText: '#ffffff',
+    text: '#fefefe',
+    lightText: '#fefefe',
     darkText: '#181818',
 
     primary: '#212121',
