@@ -1,9 +1,6 @@
 import { GetStaticProps } from 'next'
-import styled from 'styled-components'
-
-const Title = styled.h1`
-  color: ${({ theme }) => theme.colors.primary};
-`
+import Column from '../components/Column'
+import { Title, Description, Paragraph } from '../styles/pages'
 
 type Props = {
   org: {
@@ -15,14 +12,14 @@ type Props = {
 
 export default function Landing({ org }: Props) {
   return (
-    <div>
+    <Column>
       <Title>{org.login}</Title>
-      <h3>{org.description}</h3>
-      <p>
+      <Description>{org.description}</Description>
+      <Paragraph>
         {`Site: `}
         <a href={org.blog}>{org.blog}</a>
-      </p>
-    </div>
+      </Paragraph>
+    </Column>
   )
 }
 
