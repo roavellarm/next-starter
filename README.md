@@ -3,11 +3,11 @@
 </h1>
 
 <p align="center">
-  <img src="assets/next.png" height="60px" />&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/ts.png" height="60px" />&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/styled-components.png" height="60px" />&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/eslint.png" height="60px" />&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/prettier.png" height="60px" />
+  <img src="https://raw.githubusercontent.com/roavellarm/assets/main/assets/next.png" height="60px" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/roavellarm/assets/main/assets/ts.png" height="60px" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/roavellarm/assets/main/assets/styled-components.png" height="60px" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/roavellarm/assets/main/assets/eslint.png" height="60px" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/roavellarm/assets/main/assets/prettier.png" height="60px" />
 </p>
 
 ### ⚡️ Quick Start
