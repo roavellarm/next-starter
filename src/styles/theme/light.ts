@@ -7,6 +7,7 @@ const lightTheme = {
     darkText: '#000000',
 
     primary: '#6200ee',
+    onPrimary: '#fefefe',
     primaryVariant: '#3700b3',
 
     secondary: '#03dac6',

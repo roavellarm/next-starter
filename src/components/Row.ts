@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 interface RowProps {
-  center: boolean
-  right: boolean
+  center?: boolean
+  right?: boolean
 }
 
 const Row = styled.div<RowProps>`

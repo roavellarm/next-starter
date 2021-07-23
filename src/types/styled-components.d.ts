@@ -10,6 +10,7 @@ declare module 'styled-components' {
       darkText: string
 
       primary: string
+      onPrimary: string
       primaryVariant: string
 
       secondary: string

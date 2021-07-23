@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import Switch from 'react-switch'
 
+import Link from 'next/link'
 import { ThemeContext } from 'styled-components'
 import { shade } from 'polished'
 
@@ -15,7 +16,9 @@ export default function Navbar({ toggleTheme }: Props) {
 
   return (
     <Container>
-      Hello World
+      <Link href="/">Home</Link>
+      <Link href="/login">Login</Link>
+      <Link href="/register">Register</Link>
       <Switch
         onChange={toggleTheme}
         checked={title === 'dark'}
