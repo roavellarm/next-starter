@@ -1,32 +1,34 @@
 import { GetStaticProps } from 'next'
+
 import Column from '../components/Column'
 import { Title, Description, Paragraph } from '../styles/pages'
 
 type Props = {
-  org: {
+  user: {
     login: string
-    description: string
+    avatar_url: string
+    bio: string
     blog: string
   }
 }
 
-export default function Landing({ org }: Props) {
+export default function Landing({ user }: Props) {
   return (
     <Column>
-      <Title>{org.login}</Title>
-      <Description>{org.description}</Description>
+      <Title>{user.login}</Title>
+      <Description>{user.bio}</Description>
       <Paragraph>
         {`Site: `}
-        <a href={org.blog}>{org.blog}</a>
+        <a href={user.blog}>{user.blog}</a>
       </Paragraph>
     </Column>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch('https://api.github.com/orgs/rocketseat')
+  const response = await fetch('https://api.github.com/users/roavellarm')
   const data = await response.json()
   return {
-    props: { org: data },
+    props: { user: data },
   }
 }

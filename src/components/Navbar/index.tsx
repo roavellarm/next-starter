@@ -1,14 +1,16 @@
 import { useContext } from 'react'
-import { ThemeContext } from 'styled-components'
 import Switch from 'react-switch'
+
+import { ThemeContext } from 'styled-components'
 import { shade } from 'polished'
+
 import Container from './styles'
 
 interface Props {
   toggleTheme(): void
 }
 
-const Header: React.FC<Props> = ({ toggleTheme }) => {
+export default function Navbar({ toggleTheme }: Props) {
   const { palette, title } = useContext(ThemeContext)
 
   return (
@@ -28,5 +30,3 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
     </Container>
   )
 }
-
-export default Header

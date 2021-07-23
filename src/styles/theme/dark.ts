@@ -7,9 +7,12 @@ const darkTheme = {
     darkText: '#181818',
 
     primary: '#212121',
+    onPrimary: '#212121',
     primaryVariant: '#3d3d3d',
+    onPrimaryVariant: '#3d3d3d',
 
     secondary: '#03dac6',
+    onSecondary: '#03dac6',
     secondaryVariant: '#018786',
 
     background: '#181818',

@@ -1,41 +1,21 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
+  "extends": ["next", "next/core-web-vitals"],
+  "plugins": ["eslint-plugin-import-helpers"],
   "rules": {
-    "prettier/prettier": "error",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "react/jsx-filename-extension": ["off", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      { "js": "never", "jsx": "never", "ts": "never", "tsx": "never" }
-    ],
-    "react/jsx-props-no-spreading": "off",
-    "jsx-a11y/anchor-is-valid": "off"
-  },
-  "globals": {
-    "React": "writable"
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+    "no-unused-vars": "error",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/^react/",
+          "module",
+          "/^styles/",
+          "/^hooks/",
+          "/^components/",
+          ["parent", "sibling", "index"]
+        ]
       }
-    }
+    ]
   }
 }

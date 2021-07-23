@@ -1,49 +1,47 @@
 {
   "name": "app-title",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": "true",
   "license": "MIT",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint './**/*.{js,ts,tsx}' --quiet",
-    "postinstall": "husky install"
+    "lint": "eslint src --max-warnings=0",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "prepare": "husky install",
+    "test": "jest --maxWorkers=50%",
+    "test:watch": "jest --watch --maxWorkers=25%"
   },
   "dependencies": {
     "js-cookie": "^2.2.1",
-    "next": "^10.0.8",
-    "polished": "^4.1.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "next": "^11.0.1",
+    "next-seo": "^4.26.0",
+    "polished": "^4.1.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-switch": "^6.0.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
-    "@types/js-cookie": "^2.2.6",
-    "@types/node": "^14.14.34",
-    "@types/react": "^17.0.3",
-    "@types/styled-components": "^5.1.8",
-    "@typescript-eslint/eslint-plugin": "^4.17.0",
-    "@typescript-eslint/parser": "^4.17.0",
-    "babel-plugin-styled-components": "^1.12.0",
-    "eslint": "^7.22.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^5.1.3",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.3"
-  },
-  "lint-staged": {
-    "./**/*.{js,ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ]
+    "@babel/preset-typescript": "^7.14.5",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/react-hooks": "^7.0.1",
+    "@types/jest": "^26.0.24",
+    "@types/js-cookie": "^2.2.7",
+    "@types/react": "17.0.14",
+    "@types/styled-components": "^5.1.11",
+    "babel-plugin-inline-react-svg": "^2.0.1",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-styled-components": "^1.13.2",
+    "eslint": "7.31.0",
+    "eslint-config-next": "11.0.1",
+    "eslint-plugin-import-helpers": "^1.1.0",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "jest-styled-components": "^7.0.5",
+    "prettier": "^2.3.2",
+    "typescript": "4.3.5"
   }
 }
