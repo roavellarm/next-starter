@@ -6,15 +6,15 @@ import 'react-toastify/dist/ReactToastify.css'
 
 export const StyledToast = styled(ToastContainer)`
   .Toastify__toast--info {
-    background: 'rgb(51, 102, 255)';
+    background: ${({ theme }) => theme.palette.info};
   }
   .Toastify__toast--success {
-    background: 'rgb(51, 187, 102)';
+    background: ${({ theme }) => theme.palette.success};
   }
   .Toastify__toast--warning {
-    background: 'rgb(254, 255, 20)';
+    background: ${({ theme }) => theme.palette.warning};
   }
   .Toastify__toast--error {
-    background: 'rgb(255, 102, 102)';
+    background: ${({ theme }) => theme.palette.error};
   }
 `

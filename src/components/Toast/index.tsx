@@ -18,6 +18,6 @@ export const showToast = (type: 'success' | 'warn' | 'error' | 'info', message: 
   }
 }
 
-export default function Toast() {
+export function Toast() {
   return <StyledToast />
 }
