@@ -1,6 +1,8 @@
 import { GetStaticProps } from 'next'
 
-import Column from '../components/Column'
+import Column from 'components/Column'
+import { Loader } from 'components/Loader'
+
 import { Title, Description, Paragraph } from '../styles/pages'
 
 type Props = {
@@ -14,13 +16,14 @@ type Props = {
 
 export default function Landing({ user }: Props) {
   return (
-    <Column>
+    <Column center>
       <Title>{user.login}</Title>
       <Description>{user.bio}</Description>
       <Paragraph>
         {`Site: `}
         <a href={user.blog}>{user.blog}</a>
       </Paragraph>
+      <Loader loading />
     </Column>
   )
 }
