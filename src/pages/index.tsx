@@ -2,6 +2,8 @@ import { GetStaticProps } from 'next'
 
 import Column from 'components/Column'
 import { Loader } from 'components/Loader'
+import Toast, { showToast } from 'components/Toast'
+import { Button } from 'components/Button'
 
 import { Title, Description, Paragraph } from '../styles/pages'
 
@@ -24,6 +26,11 @@ export default function Landing({ user }: Props) {
         <a href={user.blog}>{user.blog}</a>
       </Paragraph>
       <Loader loading />
+      <Toast />
+      <Button onClick={() => showToast('success', 'Success message')}>Success</Button>
+      <Button onClick={() => showToast('warn', 'Warning message')}>Warning</Button>
+      <Button onClick={() => showToast('error', 'Error message')}>Error</Button>
+      <Button onClick={() => showToast('info', 'Info message')}>Info</Button>
     </Column>
   )
 }
