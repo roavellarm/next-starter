@@ -8,11 +8,17 @@ export default function Login() {
   return (
     <Container>
       <Title>Register</Title>
-      <Field type="text" name="email" placeholder="Enter email" />
-      <Field type="password" name="password" placeholder="Enter password" />
-      <Field type="password" name="password-confirmation" placeholder="Confirm password" />
+      <form>
+        <Field type="email" name="email" placeholder="Enter email" />
+        <br />
+        <Field type="password" name="password" placeholder="Enter password" />
+        <br />
+        <Field type="password" name="password-confirmation" placeholder="Confirm password" />
 
-      <Button onClick={() => alert('You clicked me')}>Sign in</Button>
+        <Button type="submit" onClick={() => alert('You clicked me')}>
+          Sign in
+        </Button>
+      </form>
     </Container>
   )
 }
