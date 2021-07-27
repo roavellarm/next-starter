@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { Title } from 'styles/pages'
 
 import { Container } from 'components/Container'
@@ -12,6 +14,7 @@ export default function Login() {
   // if (!isValidEmail(email)) errors.push('Invalid email')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
+  const router = useRouter()
 
   async function handleSubmit(event: any) {
     event.preventDefault()
@@ -21,6 +24,8 @@ export default function Login() {
 
       if (!isValidPassword(password))
         return alert('Password must contain 8 characters, uppercase and lowercase')
+
+      router.push('/')
 
       return alert('Login done with success!!')
     } catch (error) {
