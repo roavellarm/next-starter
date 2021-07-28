@@ -14,7 +14,6 @@ type LoaderProps = {
 
 export function Loader({ loading }: LoaderProps) {
   const { palette } = useTheme()
-  // className="sweet-loading"
   return (
     <FadeLoader
       css={override}

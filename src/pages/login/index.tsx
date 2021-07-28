@@ -11,7 +11,6 @@ import { Button } from 'components/Button'
 import { isValidEmail, isValidPassword } from '../../utils/authValidations'
 
 export default function Login() {
-  // if (!isValidEmail(email)) errors.push('Invalid email')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const router = useRouter()
