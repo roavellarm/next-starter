@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 
 import { useRouter } from 'next/router'
+import { isValidPassword } from 'utils/authValidations'
 
 import { Title } from 'styles/pages'
 
 import { Container } from 'components/Container'
 import { Field } from 'components/Field'
 import { Button } from 'components/Button'
-
-import { isValidPassword } from '../../utils/authValidations'
 
 export default function Login() {
   const [password, setPassword] = useState('')
