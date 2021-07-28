@@ -1,14 +1,13 @@
 import { useState } from 'react'
 
 import { useRouter } from 'next/router'
+import { isValidPassword } from 'utils/authValidations'
 
 import { Title } from 'styles/pages'
 
 import { Container } from 'components/Container'
 import { Field } from 'components/Field'
 import { Button } from 'components/Button'
-
-import { isValidEmail, isValidPassword } from '../../utils/authValidations'
 
 export default function Login() {
   const [password, setPassword] = useState('')
@@ -21,8 +20,6 @@ export default function Login() {
 
     try {
       if (passwordConfirmation !== password) return alert('Senhas não conferem!')
-
-      if (!isValidEmail(email)) return alert('Email invalido')
 
       if (!isValidPassword(password))
         return alert('Password must contain 8 characters, uppercase and lowercase')
@@ -43,7 +40,7 @@ export default function Login() {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          type="text"
+          type="email"
           name="email"
           placeholder="Enter email"
         />

@@ -8,7 +8,7 @@ import { Container } from 'components/Container'
 import { Field } from 'components/Field'
 import { Button } from 'components/Button'
 
-import { isValidEmail, isValidPassword } from '../../utils/authValidations'
+import { isValidPassword } from '../../utils/authValidations'
 
 export default function Login() {
   const [password, setPassword] = useState('')
@@ -19,8 +19,6 @@ export default function Login() {
     event.preventDefault()
 
     try {
-      if (!isValidEmail(email)) return alert('Email invalido')
-
       if (!isValidPassword(password))
         return alert('Password must contain 8 characters, uppercase and lowercase')
 
@@ -41,7 +39,7 @@ export default function Login() {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          type="text"
+          type="email"
           name="email"
           placeholder="Enter email"
         />
