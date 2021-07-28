@@ -27,24 +27,20 @@ interface CarouselProps {
 export function Carousel({ list }: CarouselProps) {
   return (
     <ReactCarousel
+      transitionTime={2000}
       infiniteLoop
       autoPlay
       showThumbs={false}
       showStatus={false}
       showIndicators={false}
-      interval={3000}
+      interval={4000}
       width="100%"
     >
       {list
         .filter((item) => !!item.image)
         .map((item) => (
           <div key={item.id}>
-            <Image
-              alt={item.name}
-              src={`${item.image}`}
-              height="300"
-              width="600"
-            />
+            <Image alt={item.name} src={`${item.image}`} height="300" width="600" />
             <StyledLegend>{item.name}</StyledLegend>
           </div>
         ))}

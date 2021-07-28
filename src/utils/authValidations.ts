@@ -3,3 +3,12 @@ export function isValidPassword(password: string) {
   if (valid.test(password)) return true
   return false
 }
+
+export function isEmail(string: string) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+  // return email && !isEmail(email.trim()) ? alert('Invalid email') : null
+
+  return re.test(string)
+}
