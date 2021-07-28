@@ -13,8 +13,7 @@ export const StyledLegend = styled.div`
   background: rgba(255, 255, 255, 0.4);
   padding: 10px;
 `
-// /* font-size: ${({ theme }) => theme.typography.size.xxl};
-// font-weight: ${({ theme }) => theme.typography.weight.bold}; */
+
 interface Item {
   id: string | number
   name: string
@@ -34,7 +33,6 @@ export function Carousel({ list }: CarouselProps) {
       showStatus={false}
       showIndicators={false}
       interval={3000}
-      // centerMode
       width="100%"
     >
       {list
@@ -46,7 +44,6 @@ export function Carousel({ list }: CarouselProps) {
               src={`${item.image}`}
               height="300"
               width="600"
-              // style={{ objectFit: 'cover', objectPosition: 'center' }}
             />
             <StyledLegend>{item.name}</StyledLegend>
           </div>
