@@ -13,8 +13,7 @@ export const StyledLegend = styled.div`
   background: rgba(255, 255, 255, 0.4);
   padding: 10px;
 `
-// /* font-size: ${({ theme }) => theme.typography.size.xxl};
-// font-weight: ${({ theme }) => theme.typography.weight.bold}; */
+
 interface Item {
   id: string | number
   name: string
@@ -28,26 +27,20 @@ interface CarouselProps {
 export function Carousel({ list }: CarouselProps) {
   return (
     <ReactCarousel
+      transitionTime={2000}
       infiniteLoop
       autoPlay
       showThumbs={false}
       showStatus={false}
       showIndicators={false}
-      interval={3000}
-      // centerMode
+      interval={4000}
       width="100%"
     >
       {list
         .filter((item) => !!item.image)
         .map((item) => (
           <div key={item.id}>
-            <Image
-              alt={item.name}
-              src={`${item.image}`}
-              height="300"
-              width="600"
-              // style={{ objectFit: 'cover', objectPosition: 'center' }}
-            />
+            <Image alt={item.name} src={`${item.image}`} height="300" width="600" />
             <StyledLegend>{item.name}</StyledLegend>
           </div>
         ))}

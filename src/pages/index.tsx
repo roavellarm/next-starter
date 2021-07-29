@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 
 import Column from 'components/Column'
 import { Loader } from 'components/Loader'
-import { Toast, showToast } from 'components/Toast'
+import { showToast } from 'components/Toast'
 import { Button } from 'components/Button'
 import { Carousel } from 'components/Carousel'
 
@@ -29,8 +29,6 @@ export default function Landing({ user }: Props) {
       </Paragraph>
 
       <Loader loading />
-
-      <Toast />
 
       <Button onClick={() => showToast('success', 'Success message')}>Success</Button>
       <Button onClick={() => showToast('warn', 'Warning message')}>Warning</Button>

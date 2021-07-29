@@ -2,7 +2,8 @@
   "extends": ["next", "next/core-web-vitals"],
   "plugins": ["eslint-plugin-import-helpers"],
   "rules": {
-    "no-unused-vars": "error",
+    "no-console": "error",
+    "no-alert": "error",
     "import-helpers/order-imports": [
       "warn",
       {
