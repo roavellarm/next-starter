@@ -1,7 +1,6 @@
-import { useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 import { useRouter } from 'next/router'
-import { isValidPassword, isEmail } from 'utils/authValidations'
 
 import { Title } from 'styles/pages'
 
@@ -9,52 +8,48 @@ import { Container } from 'components/Container'
 import { Field } from 'components/Field'
 import { Button } from 'components/Button'
 
+import { loginValidation } from './helper'
+
+const INITIAL_STATE = { password: '', email: '' }
+
 export default function Login() {
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
-  const router = useRouter()
+  const [fields, setFields] = useState(INITIAL_STATE)
 
-  async function handleSubmit(event: any) {
-    event.preventDefault()
-
-    try {
-      !isEmail(email) ? alert('Invalid email') : null
-
-      if (!isValidPassword(password))
-        return alert('Password must contain 8 characters, uppercase and lowercase')
-
-      router.push('/')
-
-      return alert('Login done with success!!')
-    } catch (error) {
-      console.log(error)
-      return alert(`Deu erro no front ${error}`)
-    }
+  const handleFields = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFields({ ...fields, [name]: value })
   }
+
+  const { push } = useRouter()
+
+  const onKeyDown = ({ key }: KeyboardEvent<HTMLInputElement>) => key === 'Enter' && submit()
+
+  const submit = () => loginValidation(fields) && push('/')
 
   return (
     <Container>
       <Title>Login</Title>
-      <form onSubmit={handleSubmit}>
-        <Field
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-          name="email"
-          placeholder="Enter email"
-        />
-        <br />
-        <Field
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button type="submit">Login</Button>
-      </form>
+
+      <Field
+        name="email"
+        onChange={handleFields}
+        onKeyDown={onKeyDown}
+        placeholder="Email"
+        type="email"
+        value={fields.email}
+      />
+
+      <br />
+
+      <Field
+        name="password"
+        onChange={handleFields}
+        onKeyDown={onKeyDown}
+        placeholder="Password"
+        type="password"
+        value={fields.password}
+      />
+      <Button onClick={submit}>Login</Button>
     </Container>
   )
 }

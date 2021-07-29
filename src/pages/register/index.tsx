@@ -1,72 +1,77 @@
-import { useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 import { useRouter } from 'next/router'
-import { isValidPassword, isEmail } from 'utils/authValidations'
 
 import { Title } from 'styles/pages'
 
 import { Container } from 'components/Container'
 import { Field } from 'components/Field'
 import { Button } from 'components/Button'
+import { showToast } from 'components/Toast'
+
+import { registerValidation } from './helper'
+
+const INITIAL_STATE = {
+  password: '',
+  email: '',
+  passwordConfirmation: '',
+}
 
 export default function Login() {
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  const router = useRouter()
+  const [fields, setFields] = useState(INITIAL_STATE)
+  const { push } = useRouter()
 
-  async function handleSubmit(event: any) {
-    event.preventDefault()
+  const handleFields = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFields({ ...fields, [name]: value })
+  }
 
-    try {
-      !isEmail(email) ? alert('Invalid email') : null
+  const onKeyDown = ({ key }: KeyboardEvent<HTMLInputElement>) => key === 'Enter' && submit()
 
-      if (passwordConfirmation !== password) return alert('Senhas não conferem!')
-
-      if (!isValidPassword(password))
-        return alert('Password must contain 8 characters, uppercase and lowercase')
-
-      router.push('/')
-      return alert('User Register done with success!!')
-    } catch (error) {
-      console.log(error)
-      return alert(`Deu erro no front ${error}`)
+  const submit = () => {
+    const isValid = registerValidation(fields)
+    if (isValid) {
+      showToast('success', 'User register successfully!')
+      return push('/')
     }
   }
 
   return (
     <Container>
       <Title>Register</Title>
-      <form onSubmit={handleSubmit}>
-        <Field
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-          name="email"
-          placeholder="Enter email"
-        />
-        <br />
-        <Field
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <Field
-          type="password"
-          name="passwordConfirmation"
-          id="password"
-          value={passwordConfirmation}
-          placeholder="Confirm password"
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-        />
 
-        <Button type="submit">Sign in</Button>
-      </form>
+      <Field
+        value={fields.email}
+        onChange={handleFields}
+        onKeyDown={onKeyDown}
+        type="text"
+        name="email"
+        placeholder="Enter email"
+      />
+
+      <br />
+
+      <Field
+        type="password"
+        name="password"
+        onKeyDown={onKeyDown}
+        placeholder="Enter password"
+        value={fields.password}
+        onChange={handleFields}
+      />
+
+      <br />
+
+      <Field
+        type="password"
+        name="passwordConfirmation"
+        onKeyDown={onKeyDown}
+        value={fields.passwordConfirmation}
+        placeholder="Confirm password"
+        onChange={handleFields}
+      />
+
+      <Button onClick={submit}>Sign in</Button>
     </Container>
   )
 }
