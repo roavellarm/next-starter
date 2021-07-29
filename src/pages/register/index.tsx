@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -26,8 +26,6 @@ export default function Login() {
     setFields({ ...fields, [name]: value })
   }
 
-  const onKeyDown = ({ key }: KeyboardEvent<HTMLInputElement>) => key === 'Enter' && submit()
-
   const submit = () => {
     const isValid = registerValidation(fields)
     if (isValid) {
@@ -41,34 +39,31 @@ export default function Login() {
       <Title>Register</Title>
 
       <Field
-        value={fields.email}
-        onChange={handleFields}
-        onKeyDown={onKeyDown}
-        type="text"
+        label="Enter email"
         name="email"
-        placeholder="Enter email"
+        onChange={handleFields}
+        onKeyDown={submit}
+        value={fields.email}
       />
 
       <br />
 
       <Field
-        type="password"
+        label="Enter password"
         name="password"
-        onKeyDown={onKeyDown}
-        placeholder="Enter password"
-        value={fields.password}
         onChange={handleFields}
+        onKeyDown={submit}
+        value={fields.password}
       />
 
       <br />
 
       <Field
-        type="password"
+        label="Confirm password"
         name="passwordConfirmation"
-        onKeyDown={onKeyDown}
-        value={fields.passwordConfirmation}
-        placeholder="Confirm password"
         onChange={handleFields}
+        onKeyDown={submit}
+        value={fields.passwordConfirmation}
       />
 
       <Button onClick={submit}>Sign in</Button>

@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -14,15 +14,12 @@ const INITIAL_STATE = { password: '', email: '' }
 
 export default function Login() {
   const [fields, setFields] = useState(INITIAL_STATE)
+  const { push } = useRouter()
 
   const handleFields = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFields({ ...fields, [name]: value })
   }
-
-  const { push } = useRouter()
-
-  const onKeyDown = ({ key }: KeyboardEvent<HTMLInputElement>) => key === 'Enter' && submit()
 
   const submit = () => loginValidation(fields) && push('/')
 
@@ -31,22 +28,20 @@ export default function Login() {
       <Title>Login</Title>
 
       <Field
+        label="Email"
         name="email"
         onChange={handleFields}
-        onKeyDown={onKeyDown}
-        placeholder="Email"
-        type="email"
+        onKeyDown={submit}
         value={fields.email}
       />
 
       <br />
 
       <Field
+        label="Password"
         name="password"
         onChange={handleFields}
-        onKeyDown={onKeyDown}
-        placeholder="Password"
-        type="password"
+        onKeyDown={submit}
         value={fields.password}
       />
       <Button onClick={submit}>Login</Button>
