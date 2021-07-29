@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useRouter } from 'next/router'
-import { isValidPassword } from 'utils/authValidations'
+import { isValidPassword, isEmail } from 'utils/authValidations'
 
 import { Title } from 'styles/pages'
 
@@ -19,6 +19,8 @@ export default function Login() {
     event.preventDefault()
 
     try {
+      !isEmail(email) ? alert('Invalid email') : null
+
       if (passwordConfirmation !== password) return alert('Senhas não conferem!')
 
       if (!isValidPassword(password))
@@ -40,7 +42,7 @@ export default function Login() {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          type="email"
+          type="text"
           name="email"
           placeholder="Enter email"
         />
