@@ -1,53 +1,63 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
 import { Title } from 'styles/pages'
 
 import { Container } from 'components/Container'
-import { Field } from 'components/Field'
+import Field from 'components/Field'
 import { Button } from 'components/Button'
+import { showToast } from 'components/Toast'
 
-import { loginValidation } from './helper'
+import { fieldsValidation } from './helper'
 
 const INITIAL_STATE = { password: '', email: '' }
 
 export default function Login() {
   const [fields, setFields] = useState(INITIAL_STATE)
+  const [fieldError, setFieldError] = useState(INITIAL_STATE)
+
+  const { push } = useRouter()
 
   const handleFields = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFields({ ...fields, [name]: value })
   }
 
-  const { push } = useRouter()
+  const cleanFields = () => {
+    setFields({ ...fields, password: '' })
+    setFieldError(INITIAL_STATE)
+  }
 
-  const onKeyDown = ({ key }: KeyboardEvent<HTMLInputElement>) => key === 'Enter' && submit()
+  const submit = () => {
+    cleanFields()
+    const { errors, password, email } = fieldsValidation(fields)
+    if (errors) return setFieldError({ password, email })
 
-  const submit = () => loginValidation(fields) && push('/')
+    showToast('success', 'User logged successfully!!')
+    push('/')
+  }
 
   return (
     <Container>
       <Title>Login</Title>
 
       <Field
+        label="Email"
         name="email"
         onChange={handleFields}
-        onKeyDown={onKeyDown}
-        placeholder="Email"
-        type="email"
+        onKeyDown={submit}
         value={fields.email}
+        error={fieldError.email}
       />
 
-      <br />
-
       <Field
+        label="Password"
         name="password"
         onChange={handleFields}
-        onKeyDown={onKeyDown}
-        placeholder="Password"
-        type="password"
+        onKeyDown={submit}
         value={fields.password}
+        error={fieldError.password}
       />
       <Button onClick={submit}>Login</Button>
     </Container>

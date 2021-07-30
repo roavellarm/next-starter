@@ -4,6 +4,8 @@
   "rules": {
     "no-console": "error",
     "no-alert": "error",
+    "no-unused-vars": "warn",
+    "no-unused-expressions": "warn",
     "import-helpers/order-imports": [
       "warn",
       {

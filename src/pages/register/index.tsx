@@ -1,15 +1,15 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
 import { Title } from 'styles/pages'
 
 import { Container } from 'components/Container'
-import { Field } from 'components/Field'
+import Field from 'components/Field'
 import { Button } from 'components/Button'
 import { showToast } from 'components/Toast'
 
-import { registerValidation } from './helper'
+import { fieldsValidation } from './helper'
 
 const INITIAL_STATE = {
   password: '',
@@ -19,6 +19,7 @@ const INITIAL_STATE = {
 
 export default function Login() {
   const [fields, setFields] = useState(INITIAL_STATE)
+  const [fieldError, setFieldError] = useState(INITIAL_STATE)
   const { push } = useRouter()
 
   const handleFields = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,14 +27,13 @@ export default function Login() {
     setFields({ ...fields, [name]: value })
   }
 
-  const onKeyDown = ({ key }: KeyboardEvent<HTMLInputElement>) => key === 'Enter' && submit()
-
   const submit = () => {
-    const isValid = registerValidation(fields)
-    if (isValid) {
-      showToast('success', 'User register successfully!')
-      return push('/')
-    }
+    setFieldError(INITIAL_STATE)
+    const { errors, password, email, passwordConfirmation } = fieldsValidation(fields)
+    if (errors) return setFieldError({ password, email, passwordConfirmation })
+
+    showToast('success', 'User register successfully!')
+    return push('/')
   }
 
   return (
@@ -41,34 +41,30 @@ export default function Login() {
       <Title>Register</Title>
 
       <Field
-        value={fields.email}
-        onChange={handleFields}
-        onKeyDown={onKeyDown}
-        type="text"
+        label="Enter email"
         name="email"
-        placeholder="Enter email"
+        onChange={handleFields}
+        onKeyDown={submit}
+        value={fields.email}
+        error={fieldError.email}
       />
 
-      <br />
-
       <Field
-        type="password"
+        label="Enter password"
         name="password"
-        onKeyDown={onKeyDown}
-        placeholder="Enter password"
-        value={fields.password}
         onChange={handleFields}
+        onKeyDown={submit}
+        value={fields.password}
+        error={fieldError.password}
       />
 
-      <br />
-
       <Field
-        type="password"
+        label="Confirm password"
         name="passwordConfirmation"
-        onKeyDown={onKeyDown}
-        value={fields.passwordConfirmation}
-        placeholder="Confirm password"
         onChange={handleFields}
+        onKeyDown={submit}
+        value={fields.passwordConfirmation}
+        error={fieldError.passwordConfirmation}
       />
 
       <Button onClick={submit}>Sign in</Button>
