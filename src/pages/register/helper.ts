@@ -1,39 +1,42 @@
 import { isValidEmail, isValidPassword } from 'utils/fieldsValidation'
 
-import { showToast } from 'components/Toast'
-
 type Register = {
   email: string
   password: string
   passwordConfirmation: string
 }
 
-export function registerValidation(data: Register): boolean {
+type Response = {
+  errors: boolean
+  email: string
+  password: string
+  passwordConfirmation: string
+}
+
+export function fieldsValidation(data: Register): Response {
   const { email, password, passwordConfirmation } = data
-  const errors = []
-
-  if (email === '') {
-    errors.push("Email can't be blank")
-  } else {
-    if (!isValidEmail(email)) errors.push('Invalid email')
+  const response = {
+    errors: false,
+    email: '',
+    password: '',
+    passwordConfirmation: '',
   }
 
-  if (password === '') {
-    errors.push("Password can't be blank")
-  } else {
-    if (!isValidPassword(password))
-      errors.push('Password must contain 8 characters, uppercase and lowercase')
-  }
+  if (email === '') response.email = "Email can't be blank"
+  else if (!isValidEmail(email)) response.email = 'Invalid email'
 
-  if (passwordConfirmation === '') errors.push("Password confirmation can't be blank")
+  if (password === '') response.password = "Password can't be blank"
+  else if (!isValidPassword(password))
+    response.password = 'Password must contain 8 characters, uppercase and lowercase'
+
+  if (passwordConfirmation === '')
+    response.passwordConfirmation = "Password confirmation can't be blank"
 
   if (password !== '' && passwordConfirmation !== '' && password !== passwordConfirmation)
-    errors.push("Passwords don't match")
+    response.passwordConfirmation = "Passwords don't match"
 
-  if (errors.length) {
-    errors.map((error) => showToast('error', error))
-    return false
-  }
+  if (!!response.email || !!response.password || !!response.passwordConfirmation)
+    response.errors = true
 
-  return true
+  return response
 }

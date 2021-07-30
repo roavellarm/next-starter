@@ -5,11 +5,11 @@ import { useRouter } from 'next/router'
 import { Title } from 'styles/pages'
 
 import { Container } from 'components/Container'
-import { Field } from 'components/Field'
+import Field from 'components/Field'
 import { Button } from 'components/Button'
 import { showToast } from 'components/Toast'
 
-import { registerValidation } from './helper'
+import { fieldsValidation } from './helper'
 
 const INITIAL_STATE = {
   password: '',
@@ -19,6 +19,7 @@ const INITIAL_STATE = {
 
 export default function Login() {
   const [fields, setFields] = useState(INITIAL_STATE)
+  const [fieldError, setFieldError] = useState(INITIAL_STATE)
   const { push } = useRouter()
 
   const handleFields = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,11 +28,12 @@ export default function Login() {
   }
 
   const submit = () => {
-    const isValid = registerValidation(fields)
-    if (isValid) {
-      showToast('success', 'User register successfully!')
-      return push('/')
-    }
+    setFieldError(INITIAL_STATE)
+    const { errors, password, email, passwordConfirmation } = fieldsValidation(fields)
+    if (errors) return setFieldError({ password, email, passwordConfirmation })
+
+    showToast('success', 'User register successfully!')
+    return push('/')
   }
 
   return (
@@ -44,9 +46,8 @@ export default function Login() {
         onChange={handleFields}
         onKeyDown={submit}
         value={fields.email}
+        error={fieldError.email}
       />
-
-      <br />
 
       <Field
         label="Enter password"
@@ -54,9 +55,8 @@ export default function Login() {
         onChange={handleFields}
         onKeyDown={submit}
         value={fields.password}
+        error={fieldError.password}
       />
-
-      <br />
 
       <Field
         label="Confirm password"
@@ -64,6 +64,7 @@ export default function Login() {
         onChange={handleFields}
         onKeyDown={submit}
         value={fields.passwordConfirmation}
+        error={fieldError.passwordConfirmation}
       />
 
       <Button onClick={submit}>Sign in</Button>
