@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 import { Title } from 'styles/pages'
 
@@ -29,12 +30,14 @@ export default function Login() {
     setFieldError(INITIAL_STATE)
   }
 
-  const submit = () => {
+  const submit = async () => {
     cleanFields()
     const { errors, password, email } = fieldsValidation(fields)
     if (errors) return setFieldError({ password, email })
 
-    showToast('success', 'User logged successfully!!')
+    const { data } = await axios.post('/api/login', fields)
+
+    showToast('success', `User ${data?.name} logged successfully!!`)
     push('/')
   }
 
