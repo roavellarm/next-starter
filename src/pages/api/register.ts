@@ -1,10 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
+import connectDB from 'middleware/mongodbutl'
+import md5 from 'md5'
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const user = {
-    email: req.body.email || '',
-    name: 'Foo Bar',
+import User from './models/User'
+
+const register = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const user = await User.create({
+      email: req.body.email,
+      password: md5(req.body.password),
+    })
+
+    return res.status(200).send({ user })
+  } catch (error) {
+    return res.status(500).send(error.message)
   }
-
-  res.status(200).json(user)
 }
+
+export default connectDB(register)
