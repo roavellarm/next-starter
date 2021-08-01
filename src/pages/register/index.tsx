@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react'
 
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { registerFieldsValidation } from 'validators/registerFieldsValidation'
 
 import { Title } from 'styles/pages'
 
@@ -9,8 +10,6 @@ import { Container } from 'components/Container'
 import Field from 'components/Field'
 import { Button } from 'components/Button'
 import { showToast } from 'components/Toast'
-
-import { fieldsValidation } from './helper'
 
 const INITIAL_STATE = {
   email: '',
@@ -41,7 +40,7 @@ export default function Login() {
 
   const submit = async () => {
     setFieldError(INITIAL_STATE)
-    const { errors, password, email, passwordConfirmation } = fieldsValidation(fields)
+    const { errors, password, email, passwordConfirmation } = registerFieldsValidation(fields)
     if (errors) return setFieldError({ password, email, passwordConfirmation })
 
     try {

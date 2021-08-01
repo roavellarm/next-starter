@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import md5 from 'md5'
 import withDb from 'middleware/withDb'
-
-import User from './models/User'
+import User from 'api/models/User'
 
 const register = async (req: NextApiRequest, res: NextApiResponse) => {
   try {

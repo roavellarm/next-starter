@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import { ThemeProvider, DefaultTheme } from 'styled-components'
-import usePersistedState from 'utils/usePersistedState'
+import usePersistedState from 'helpers/usePersistedState'
 
 import GlobalStyle from 'styles/global'
 import { light, dark } from 'styles/theme'

@@ -1,4 +1,4 @@
-import { isValidEmail, isValidPassword } from 'utils/fieldsValidation'
+import { isValidEmail, isValidPassword } from 'helpers/utils'
 
 type Login = {
   email: string
@@ -11,7 +11,7 @@ type Response = {
   password: string
 }
 
-export function fieldsValidation({ email, password }: Login): Response {
+export function emailAndPasswordValidation({ email, password }: Login): Response {
   const response = {
     errors: false,
     email: '',

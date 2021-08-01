@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react'
 
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { emailAndPasswordValidation } from 'validators/emailAndPasswordValidation'
 
 import { Title } from 'styles/pages'
 
@@ -9,8 +10,6 @@ import { Container } from 'components/Container'
 import Field from 'components/Field'
 import { Button } from 'components/Button'
 import { showToast } from 'components/Toast'
-
-import { fieldsValidation } from './helper'
 
 const INITIAL_STATE = { password: '', email: '' }
 
@@ -32,7 +31,7 @@ export default function Login() {
 
   const submit = async () => {
     cleanFields()
-    const { errors, password, email } = fieldsValidation(fields)
+    const { errors, password, email } = emailAndPasswordValidation(fields)
     if (errors) return setFieldError({ password, email })
 
     const { data } = await axios.post('/api/login', fields)
