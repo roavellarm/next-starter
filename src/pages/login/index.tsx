@@ -3,7 +3,6 @@ import { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { emailAndPasswordValidation } from 'validators/emailAndPasswordValidation'
-import { generateToken } from 'services/token'
 
 import { Title } from 'styles/pages'
 
@@ -36,11 +35,6 @@ export default function Login() {
     if (errors) return setFieldError({ password, email })
 
     const { data } = await axios.post('/api/login', fields)
-
-    const token = await generateToken(fields)
-
-    // eslint-disable-next-line no-console
-    console.log(`Token: ${token}`)
 
     showToast('success', `User ${data?.name} logged successfully!!`)
     push('/')
