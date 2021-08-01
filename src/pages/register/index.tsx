@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { registerFieldsValidation } from 'validators/registerFieldsValidation'
+import { generateToken } from 'services/token'
 
 import { Title } from 'styles/pages'
 
@@ -45,6 +46,11 @@ export default function Login() {
 
     try {
       const { data } = await axios.post('/api/register', fields)
+
+      const token = await generateToken(fields)
+
+      // eslint-disable-next-line no-console
+      console.log(`Token: ${token}`)
 
       showToast('success', `User ${data.user.email} register successfully!`)
       return push('/')
