@@ -13,14 +13,25 @@ import { showToast } from 'components/Toast'
 import { fieldsValidation } from './helper'
 
 const INITIAL_STATE = {
-  password: '',
   email: '',
+  password: '',
   passwordConfirmation: '',
 }
 
+type Fields = {
+  password: string
+  email: string
+  passwordConfirmation: string
+}
+
+type FieldList = {
+  label: string
+  name: keyof Fields
+}
+
 export default function Login() {
-  const [fields, setFields] = useState(INITIAL_STATE)
-  const [fieldError, setFieldError] = useState(INITIAL_STATE)
+  const [fields, setFields] = useState<Fields>(INITIAL_STATE)
+  const [fieldError, setFieldError] = useState<Fields>(INITIAL_STATE)
   const { push } = useRouter()
 
   const handleFields = (event: ChangeEvent<HTMLInputElement>) => {
@@ -43,38 +54,29 @@ export default function Login() {
     }
   }
 
+  const fieldList: FieldList[] = [
+    { label: 'Enter email', name: 'email' },
+    { label: 'Enter password', name: 'password' },
+    { label: 'Confirm password', name: 'passwordConfirmation' },
+  ]
+
   return (
     <Container>
       <Title>Register</Title>
 
-      <Field
-        label="Enter email"
-        name="email"
-        onChange={handleFields}
-        onKeyDown={submit}
-        value={fields.email}
-        error={fieldError.email}
-      />
+      {fieldList.map((f) => (
+        <Field
+          key={f.name}
+          label={f.label}
+          name={f.name}
+          onChange={handleFields}
+          onKeyDown={submit}
+          value={fields[f.name]}
+          error={fieldError[f.name]}
+        />
+      ))}
 
-      <Field
-        label="Enter password"
-        name="password"
-        onChange={handleFields}
-        onKeyDown={submit}
-        value={fields.password}
-        error={fieldError.password}
-      />
-
-      <Field
-        label="Confirm password"
-        name="passwordConfirmation"
-        onChange={handleFields}
-        onKeyDown={submit}
-        value={fields.passwordConfirmation}
-        error={fieldError.passwordConfirmation}
-      />
-
-      <Button onClick={submit}>Sign in</Button>
+      <Button onClick={submit}>Register</Button>
     </Container>
   )
 }

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import connectDB from 'middleware/mongodbutl'
 import md5 from 'md5'
+import withDb from 'middleware/withDb'
 
 import User from './models/User'
 
@@ -13,8 +13,8 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).send({ user })
   } catch (error) {
-    return res.status(500).send(error.message)
+    return res.status(500).send(error)
   }
 }
 
-export default connectDB(register)
+export default withDb(register)
