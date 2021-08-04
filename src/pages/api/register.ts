@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import md5 from 'md5'
+// import bcrypt from 'bcrypt'
 import withDb from 'middleware/withDb'
 import User from 'api/models/User'
 
@@ -7,7 +7,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const user = await User.create({
       email: req.body.email,
-      password: md5(req.body.password + process.env.SALT_KEY),
+      password: req.body.password,
     })
 
     return res.status(200).send({ user })

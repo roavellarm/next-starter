@@ -27,8 +27,7 @@ export function registerFieldsValidation(data: Register): Response {
 
   response = { ...response, ...result }
 
-  if (passwordConfirmation === '')
-    response.passwordConfirmation = "Password confirmation can't be blank"
+  if (passwordConfirmation === '') response.passwordConfirmation = 'Password confirmation required'
 
   if (password !== '' && passwordConfirmation !== '' && password !== passwordConfirmation)
     response.passwordConfirmation = "Passwords don't match"

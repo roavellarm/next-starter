@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { ChangeEvent, KeyboardEvent } from 'react'
 
 import { Container, Label, Input, Error } from './styles'
@@ -18,19 +19,33 @@ const fieldType: any = {
 
 export default function Field({ name, label, error = '', value, onChange, onKeyDown }: FieldType) {
   const onPressEnter = ({ key }: KeyboardEvent<HTMLInputElement>) => key === 'Enter' && onKeyDown()
+  const [viewPassword, setViewPassword] = useState(false)
+  const isPassword = fieldType[name] === 'password'
+
+  const handleType = () => {
+    if (isPassword) return viewPassword ? 'text' : 'password'
+
+    return fieldType[name] || 'text'
+  }
 
   return (
     <Container>
       {!!value && <Label>{label}</Label>}
 
       <Input
-        type={fieldType[name] || 'text'}
+        type={handleType()}
         name={name}
         onKeyDown={(event) => onPressEnter(event)}
         value={value}
         placeholder={label}
         onChange={(event) => onChange(event)}
       />
+
+      {isPassword && (
+        <button type="button" onClick={() => setViewPassword(!viewPassword)}>
+          View Pass
+        </button>
+      )}
 
       {!!error && <Error>{error}</Error>}
     </Container>

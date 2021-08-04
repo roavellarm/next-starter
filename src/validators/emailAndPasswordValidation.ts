@@ -18,10 +18,10 @@ export function emailAndPasswordValidation({ email, password }: Login): Response
     password: '',
   }
 
-  if (email === '') response.email = "Email can't be blank"
+  if (email === '') response.email = 'Email required'
   else if (!isValidEmail(email)) response.email = 'Invalid email'
 
-  if (password === '') response.password = "Password can't be blank"
+  if (password === '') response.password = 'Password required'
   else if (!isValidPassword(password))
     response.password = 'Password must contain 8 characters, uppercase and lowercase'
 
