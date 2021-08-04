@@ -30,3 +30,29 @@ export const Error = styled.span`
   transform: translate(-50%, 110%);
   color: ${({ theme }) => theme.palette.error};
 `
+
+export const EyeContainer = styled.div`
+  margin-top: 20px;
+  float: right;
+  margin-left: 95%;
+  position: absolute;
+  cursor: pointer;
+
+  @media screen and (max-width: 500px) {
+    margin-top: 20px;
+    float: right;
+    margin-left: 82%;
+  }
+
+  @media screen and (min-width: 500px) and (max-width: 560px) {
+    margin-top: 20px;
+    float: right;
+    margin-left: 90%;
+  }
+
+  @media screen and (min-width: 560px) and (max-width: 850px) {
+    margin-top: 20px;
+    float: right;
+    margin-left: 90%;
+  }
+`

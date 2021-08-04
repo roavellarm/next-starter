@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { ChangeEvent, KeyboardEvent } from 'react'
+import { BsEyeSlash } from 'react-icons/bs'
 
-import { Container, Label, Input, Error } from './styles'
+import { Container, Label, Input, Error, EyeContainer } from './styles'
 
 type FieldType = {
   name: string
@@ -36,16 +37,15 @@ export default function Field({ name, label, error = '', value, onChange, onKeyD
         type={handleType()}
         name={name}
         onKeyDown={(event) => onPressEnter(event)}
-        value={value}
         placeholder={label}
         onChange={(event) => onChange(event)}
       />
 
-      {isPassword && (
-        <button type="button" onClick={() => setViewPassword(!viewPassword)}>
-          View Pass
-        </button>
-      )}
+      <EyeContainer>
+        {isPassword && (
+          <BsEyeSlash size="19px" type="button" onClick={() => setViewPassword(!viewPassword)} />
+        )}
+      </EyeContainer>
 
       {!!error && <Error>{error}</Error>}
     </Container>
