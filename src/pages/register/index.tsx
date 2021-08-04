@@ -3,14 +3,14 @@ import { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { registerFieldsValidation } from 'validators/registerFieldsValidation'
-import { generateToken } from 'services/token'
+// import { generateToken } from 'services/token'
 
 import { Title } from 'styles/pages'
 
 import { Container } from 'components/Container'
 import Field from 'components/Field'
 import { Button } from 'components/Button'
-import { showToast } from 'components/Toast'
+import { showError, showSuccess } from 'components/Toast'
 
 const INITIAL_STATE = {
   email: '',
@@ -47,15 +47,12 @@ export default function Login() {
     try {
       const { data } = await axios.post('/api/register', fields)
 
-      const token = await generateToken(fields)
+      // const token = await generateToken(fields)
 
-      // eslint-disable-next-line no-console
-      console.log(`Token: ${token}`)
-
-      showToast('success', `User ${data.user.email} register successfully!`)
+      showSuccess(`User ${data.user.email} register successfully!`)
       return push('/')
     } catch (error) {
-      return showToast('error', error)
+      return showError(error)
     }
   }
 

@@ -9,7 +9,7 @@ import { Title } from 'styles/pages'
 import { Container } from 'components/Container'
 import Field from 'components/Field'
 import { Button } from 'components/Button'
-import { showToast } from 'components/Toast'
+import { showSuccess } from 'components/Toast'
 
 const INITIAL_STATE = { password: '', email: '' }
 
@@ -36,7 +36,7 @@ export default function Login() {
 
     const { data } = await axios.post('/api/login', fields)
 
-    showToast('success', `User ${data?.name} logged successfully!!`)
+    showSuccess(`User ${data?.name} logged successfully!!`)
     push('/')
   }
 

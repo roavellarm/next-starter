@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 
 import Column from 'components/Column'
 import { Loader } from 'components/Loader'
-import { showToast } from 'components/Toast'
+import { showError, showInfo, showSuccess, showWarn } from 'components/Toast'
 import { Button } from 'components/Button'
 import { Carousel } from 'components/Carousel'
 
@@ -30,10 +30,10 @@ export default function Landing({ user }: Props) {
 
       <Loader loading />
 
-      <Button onClick={() => showToast('success', 'Success message')}>Success</Button>
-      <Button onClick={() => showToast('warn', 'Warning message')}>Warning</Button>
-      <Button onClick={() => showToast('error', 'Error message')}>Error</Button>
-      <Button onClick={() => showToast('info', 'Info message')}>Info</Button>
+      <Button onClick={() => showSuccess('Success message')}>Success</Button>
+      <Button onClick={() => showWarn('Warning message')}>Warning</Button>
+      <Button onClick={() => showError('Error message')}>Error</Button>
+      <Button onClick={() => showInfo('Info message')}>Info</Button>
 
       <Carousel
         list={[
