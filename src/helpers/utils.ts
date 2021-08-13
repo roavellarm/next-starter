@@ -1,3 +1,5 @@
+// import { hashSync, compareSync } from 'bcrypt'
+
 export function isValidPassword(password: string) {
   const valid = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}/
   if (valid.test(password)) return true
@@ -10,3 +12,11 @@ export function isValidEmail(string: string) {
 
   return re.test(string)
 }
+
+// export function encryptPassword(password: string) {
+//   return hashSync(password, `${process.env.SALT_KEY}`)
+// }
+
+// export function isCorrectPassword(password: string, hash: string) {
+//   return compareSync(password, hash)
+// }

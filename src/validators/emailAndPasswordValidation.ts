@@ -1,4 +1,4 @@
-import { isValidEmail, isValidPassword } from 'utils/fieldsValidation'
+import { isValidEmail, isValidPassword } from 'helpers/utils'
 
 type Login = {
   email: string
@@ -11,17 +11,17 @@ type Response = {
   password: string
 }
 
-export function fieldsValidation({ email, password }: Login): Response {
+export function emailAndPasswordValidation({ email, password }: Login): Response {
   const response = {
     errors: false,
     email: '',
     password: '',
   }
 
-  if (email === '') response.email = "Email can't be blank"
+  if (email === '') response.email = 'Email required'
   else if (!isValidEmail(email)) response.email = 'Invalid email'
 
-  if (password === '') response.password = "Password can't be blank"
+  if (password === '') response.password = 'Password required'
   else if (!isValidPassword(password))
     response.password = 'Password must contain 8 characters, uppercase and lowercase'
 

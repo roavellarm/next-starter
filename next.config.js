@@ -1,6 +1,6 @@
 module.exports = {
   reactStrictMode: true,
-  env: {},
+  env: { DATABASE: process.env.DATABASE, SECRET: process.env.SECRET },
   images: {
     domains: ['source.unsplash.com'],
   },

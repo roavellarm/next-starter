@@ -1,4 +1,4 @@
-import { isValidEmail, isValidPassword } from 'utils/fieldsValidation'
+import { emailAndPasswordValidation } from 'validators/emailAndPasswordValidation'
 
 type Register = {
   email: string
@@ -13,24 +13,21 @@ type Response = {
   passwordConfirmation: string
 }
 
-export function fieldsValidation(data: Register): Response {
+export function registerFieldsValidation(data: Register): Response {
   const { email, password, passwordConfirmation } = data
-  const response = {
+
+  let response = {
     errors: false,
     email: '',
     password: '',
     passwordConfirmation: '',
   }
 
-  if (email === '') response.email = "Email can't be blank"
-  else if (!isValidEmail(email)) response.email = 'Invalid email'
+  const result = emailAndPasswordValidation({ email, password })
 
-  if (password === '') response.password = "Password can't be blank"
-  else if (!isValidPassword(password))
-    response.password = 'Password must contain 8 characters, uppercase and lowercase'
+  response = { ...response, ...result }
 
-  if (passwordConfirmation === '')
-    response.passwordConfirmation = "Password confirmation can't be blank"
+  if (passwordConfirmation === '') response.passwordConfirmation = 'Password confirmation required'
 
   if (password !== '' && passwordConfirmation !== '' && password !== passwordConfirmation)
     response.passwordConfirmation = "Passwords don't match"
