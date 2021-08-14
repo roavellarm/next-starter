@@ -1,22 +1,18 @@
-// import { hashSync, compareSync } from 'bcrypt'
+import * as bcrypt from 'bcrypt'
 
-export function isValidPassword(password: string) {
-  const valid = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}/
-  if (valid.test(password)) return true
-  return false
-}
+import config from '../../next.config'
 
-export function isValidEmail(string: string) {
-  const re =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const passwordPattern = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}/
 
-  return re.test(string)
-}
+const emailPattern =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-// export function encryptPassword(password: string) {
-//   return hashSync(password, `${process.env.SALT_KEY}`)
-// }
+export const isValidPassword = (password: string) => passwordPattern.test(password)
 
-// export function isCorrectPassword(password: string, hash: string) {
-//   return compareSync(password, hash)
-// }
+export const isValidEmail = (email: string) => emailPattern.test(email)
+
+export const encryptPassword = (password: string) =>
+  bcrypt.hashSync(password + `${config.env.SECRET}`, `${config.env.SALT_ROUND}`)
+
+export const verifyPassword = (password: string, hash: string) =>
+  bcrypt.compareSync(password + `${config.env.SECRET}`, hash)

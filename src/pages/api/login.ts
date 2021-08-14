@@ -1,14 +1,20 @@
 import User from 'api/models/User'
+import { verifyPassword } from 'helpers/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import * as bcrypt from 'bcrypt'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const data = await User.findOne(req.body.email)
+  try {
+    const { email, password } = req.body
 
-  const hashPassword = bcrypt.compareSync(req.body.password, data.password) // true
-  if (!hashPassword) {
-    res.send({ msg: 'Senha invalida' })
+    const user = await User.findOne(email)
+
+    const isCorrectPassword = verifyPassword(password, user.password)
+
+    if (!isCorrectPassword)
+      return res.status(404).send({ message: 'Incorrect email and/or password' })
+
+    return res.status(200).json(req.body.email)
+  } catch (error) {
+    return res.status(500).send(error)
   }
-
-  res.status(200).json(req.body.email)
 }
