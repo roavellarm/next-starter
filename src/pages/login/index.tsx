@@ -9,7 +9,7 @@ import { Title } from 'styles/pages'
 import { Container } from 'components/Container'
 import Field from 'components/Field'
 import { Button } from 'components/Button'
-import { showSuccess } from 'components/Toast'
+import { showError, showSuccess } from 'components/Toast'
 
 const INITIAL_STATE = { password: '', email: '' }
 
@@ -32,12 +32,17 @@ export default function Login() {
   const submit = async () => {
     cleanFields()
     const { errors, password, email } = emailAndPasswordValidation(fields)
+
     if (errors) return setFieldError({ password, email })
 
-    const { data } = await axios.post('/api/login', fields)
+    try {
+      const { data } = await axios.post('/api/login', fields)
 
-    showSuccess(`User ${data?.name} logged successfully!!`)
-    push('/')
+      showSuccess(`User ${data?.name} logged successfully!!`)
+      return push('/')
+    } catch (error) {
+      return showError(error)
+    }
   }
 
   return (
